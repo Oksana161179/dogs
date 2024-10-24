@@ -11,6 +11,9 @@ def get_dog_image():# создаем функцию получения изоб�
         response = requests.get("https://dog.ceo/api/breeds/image/random")
         response.raise_for_status()# узнаем статус существует ли сайт
         data = response.json()# в дате лежит ответ от json
+        print(data)#распечатываем ссылки на загруженые картинки
+        print(data['message'])
+        print(data['status'])
         return data['message']# возвращается сообщение о сайте
     except Exception as e:# обрабатываем исключения
         mb.showerror("Ошибка", f"Возникла ошибка при запросе к API {e}")
@@ -67,11 +70,13 @@ width_label.pack(side="left", padx=(10, 0))#side="left" означает, что
 # что слева будет 10 пикселей, а справа будет ноль пикселей
 with_spinbox = ttk.Spinbox(from_=200, to=500, increment=50, width=5)#создаем спинбокс
 with_spinbox.pack(side="left", padx=(0, 10))
+with_spinbox.set(300)#устанавливаем(set) размер картинки по умолчанию
 
 height_label = ttk.Label(text="Высота:")#создаем метку, которая отвечает за высоту
 height_label.pack(side="left", padx=(10, 0))
 height_spinbox = ttk.Spinbox(from_=200, to=500, increment=50, width=5)
 height_spinbox.pack(side="left", padx=(0, 10))
+height_spinbox.set(300)#устанавливаем(set) размер картинки по умолчанию
 
 top_level_window = Toplevel(window)#создаем новое окно
 top_level_window.title("Изображение собачек")#задаем заголовок новому окну
